@@ -23,13 +23,18 @@
 
   .home-content {
 
-    margin: 5px auto;
+    // margin: 5px auto;
 
     input {
       font-size: 1.2rem;
       font-family: $font1;
       width: 150px;
       margin-bottom: 10px;
+      height: 50px;
+    }
+
+    #autreIntervenant {
+      width: 300px;
     }
 
     button {

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import PetitConso from "../components/PetitConso";
 import GrosConso from "../components/GrosConso";
+import messagesInfo from "../assets/optionsMessage/messagesInfo.json";
+import WriteDoc from "../components/WriteDoc";
 
 import {
   setInterType,
@@ -25,8 +27,6 @@ import {
   setInterAgence,
   clearInterAgence,
 } from "../feature/interSelectedSlice";
-
-import WriteDoc from "../components/WriteDoc";
 
 const Home = () => {
   const [selectedType, setSelectedType] = useState(""); // Valeur locale de interType
@@ -92,6 +92,24 @@ const Home = () => {
   const [messageInfoGrosConso, setMessageInfoGrosConso] = useState("");
   const [messageInfoGestes, setMessageInfoGestes] = useState("");
   const [messageGenerate, setMessageGenerate] = useState("");
+
+  // Gestion des Autre
+
+  const [isAutreIntervenantSelected, setIsAutreIntervenantSelected] =
+    useState(false);
+  const [isAutrePetitConsoSelected, setIsAutrePetitConsoSelected] = useState([
+    false,
+    false,
+    false,
+    false,
+    false,
+  ]);
+  const [isAutreGrosConsoSelected, setIsAutreGrosConsoSelected] = useState([
+    false,
+    false,
+    false,
+  ]);
+
   useEffect(() => {
     // Défilement vers le haut de la page au chargement
     window.scrollTo(0, 0);
@@ -140,87 +158,22 @@ const Home = () => {
     dispatch(clearInterAudio());
     dispatch(clearInterId());
     dispatch(clearInterAgence());
+
+    setIsAutreIntervenantSelected(false);
+    setIsAutrePetitConsoSelected([false, false, false, false, false]);
+    setIsAutreGrosConsoSelected([false, false, false]);
   };
 
   const handleTypeInter = (typeSelected) => {
     console.log("handleTypeInter :" + typeSelected);
     dispatch(setInterType(typeSelected));
     setSelectedType(typeSelected);
-    switch (typeSelected) {
-      case `Chasse d'Eau 3/6 litres WC au sol`:
-        setMessageInfoDuree("RAS");
-        setMessageInfoPetitConso("RAS");
-        setMessageInfoGrosConso(`Matériel classique en stock dans le camion`);
-        setMessageInfoGestes(
-          `-	Remplacement du robinet de WC + ensemble mécanisme chasse d’eau `
-        );
-        break;
-      case `Chauffe-Eau blinde`:
-        setMessageInfoDuree(
-          `(1,75h des 15L à 100L) – (2,25h des 150L à 200L) – (2,5h des 250 à 300L) `
-        );
-        setMessageInfoPetitConso(
-          `(ex. -> ??? plâtre, renfort bois, fixation de part en part, groupe de sécu coudé, groupe de sécu réverso ??? )`
-        );
-        setMessageInfoGrosConso(
-          `-	Gros matériel 95% du temps toujours en stock chez fournisseur (à vérifier par Boris tout de même avec la ref sur le site du fournisseur si c’est fait par un employé blicko)`
-        );
-        setMessageInfoGestes(`- Remplacement du chauffe-eau électrique
-        - Bien valider l’alimentation électrique du chauffe-eau et si possible même en début de chantier !
-        - Bien filmer les références du nouveau chauffe-eau dans la vfc. `);
-        break;
-      case `Remplacer Meuble Vasque`:
-        setMessageInfoDuree("2H30min");
-        setMessageInfoPetitConso("Wago ou domino");
-        setMessageInfoGrosConso(
-          `Stock bureau à vérifier ou à commander , Mitigeur stock camion`
-        );
-        setMessageInfoGestes(`-	Remplacement ou mise en place d’un meuble lavabo . (miroir ou pas )
-        -	Sur la vfc, bien filmer la bonne tenu de l’ensemble, la bonne étanchéité des raccords et l’eau froide et chaude correctement branchés
-        `);
-        break;
-      case `Robinet Mitigeur`:
-        setMessageInfoDuree("20/30/40 minutes ");
-        setMessageInfoPetitConso("cache trou, raccords olive ou tectite, … ");
-        setMessageInfoGrosConso(`Matériel classique en stock dans le camion`);
-        setMessageInfoGestes(`-	Remplacement du robinet. 
-        -	Sur la vfc, bien filmer la bonne tenu de l’ensemble, la bonne étanchéité des raccords et l’eau froide et chaude correctement branchés
-        `);
-        break;
-      case `Vanne Radiateurs`:
-        setMessageInfoDuree("4 h");
-        setMessageInfoPetitConso("RAS");
-        setMessageInfoGrosConso(
-          "Matériel classique dispo chez fournisseur Richardson"
-        );
-        setMessageInfoGestes(`-	Purge de l'installation . 
-        -	Remplacement robinet simple et coude de réglage sur 1 radiateur cuisine . 
-        -	 Remplacement robinet de réglage simple et coude de réglage sur 2 radiateur mezzanine. 
-        -	Remplacement robinet simple et coude de réglage dans une chambre . 
-        -	Remplacement robinet de réglage et coude de réglage dans sur 2 radiateurs du salon .
-        `);
-        break;
-      case `WC au sol std`:
-        setMessageInfoDuree("2,5h  ");
-        setMessageInfoPetitConso(
-          "ex : pipe std 90° avec manchon ou ZTT, fixations WC,… "
-        );
-        setMessageInfoGrosConso(
-          `95% du temps toujours en stock chez fournisseur (à vérifier par Boris tout de même avec la ref sur le site du fournisseur si c’est fait par un blickoMan )`
-        );
-        setMessageInfoGestes(
-          `-	Remplacement du wc complet (robinet WC y compris) avec reprise correcte de l’alimentation, remplacement de la pipe de wc ou au minimum du joint+collerette nicoll, bonne fixation au sol avec silicone translucide à la base de la cuvette si nécessité de renforcer la fixation de l’ensemble`
-        );
-        break;
-      case `Autre`:
-        setMessageInfoDuree("");
-        setMessageInfoPetitConso("");
-        setMessageInfoGrosConso("");
-        setMessageInfoGestes("");
-        break;
-      default:
-        break;
-    }
+    // Utilisez les données du fichier JSON pour afficher les messages informatifs correspondants
+    const messagesData = messagesInfo[typeSelected] || {};
+    setMessageInfoDuree(messagesData.messageInfoDuree || "");
+    setMessageInfoPetitConso(messagesData.messageInfoPetitConso || "");
+    setMessageInfoGrosConso(messagesData.messageInfoGrosConso || "");
+    setMessageInfoGestes(messagesData.messageInfoGestes || "");
   };
 
   const handleNbInter = (nbSelected) => {
@@ -233,6 +186,15 @@ const Home = () => {
     console.log("handleNomIntervenant :" + nomSelected);
     dispatch(setNomIntervenant(nomSelected));
     setSelectedNomIntervenant(nomSelected);
+
+    // Activer le champ de texte si "Autre" est sélectionné
+    setIsAutreIntervenantSelected(nomSelected === "Autre");
+  };
+
+  const handleAutreIntervenant = (nomInput) => {
+    console.log("handleAutreIntervenant :" + nomInput);
+    dispatch(setNomIntervenant(nomInput));
+    setSelectedNomIntervenant(nomInput);
   };
 
   const handleDureeInter = (dureeSelected) => {
@@ -257,23 +219,58 @@ const Home = () => {
     dispatch(setInterGrosConso(updatedGrosConso));
   };
 
+  const handleAutrePetitConso = (nomInput, lineNumber) => {
+    console.log(`handleAutrePetitConso (${lineNumber}): ${nomInput}`);
+    // Utilisez lineNumber pour mettre à jour l'état spécifique à la ligne
+    const updatedAutrePetitConsoSelected = [...isAutrePetitConsoSelected];
+    updatedAutrePetitConsoSelected[lineNumber] = true; // ou false selon vos besoins
+    setIsAutrePetitConsoSelected(updatedAutrePetitConsoSelected);
+
+    // Enregistrez également la valeur de l'input "Autre" pour la ligne spécifique
+    const updatedSelectedInterPetitConso = [...selectedInterPetitConso];
+    updatedSelectedInterPetitConso[lineNumber] = nomInput;
+    setSelectedInterPetitConso(updatedSelectedInterPetitConso);
+  };
+
+  const handleAutreGrosConso = (nomInput, lineNumber) => {
+    console.log(`handleAutreGrosConso (${lineNumber}): ${nomInput}`);
+    // Utilisez lineNumber pour mettre à jour l'état spécifique à la ligne
+    const updatedAutreGrosConsoSelected = [...isAutreGrosConsoSelected];
+    updatedAutreGrosConsoSelected[lineNumber] = true; // ou false selon vos besoins
+    setIsAutreGrosConsoSelected(updatedAutreGrosConsoSelected);
+
+    // Enregistrez également la valeur de l'input "Autre" pour la ligne spécifique
+    const updatedSelectedInterGrosConso = [...selectedInterGrosConso];
+    updatedSelectedInterGrosConso[lineNumber] = nomInput;
+    setSelectedInterGrosConso(updatedSelectedInterGrosConso);
+  };
+
   const handlePetitConsoSelect = (petitconsoSelected, index) => {
-    console.log("handlePetitConsoSelect :" + petitconsoSelected);
+    console.log("handlePetitConsoSelect :" + index + ":" + petitconsoSelected);
     const updatedInterPetitConso = [...selectedInterPetitConso];
     updatedInterPetitConso[index] = petitconsoSelected || "";
 
     dispatch(setInterPetitConso(updatedInterPetitConso));
     setSelectedInterPetitConso(updatedInterPetitConso);
+
+    // Activer le champ de texte si "Autre" est sélectionné
+    const updatedIsAutrePetitConsoSelected = [...isAutrePetitConsoSelected];
+    updatedIsAutrePetitConsoSelected[index] = petitconsoSelected === "Autre";
+    setIsAutrePetitConsoSelected(updatedIsAutrePetitConsoSelected);
   };
 
   const handleGrosConsoSelect = (grosconsoSelected, index) => {
-    console.log("handleGrosConsoSelect :" + grosconsoSelected);
-
+    console.log("handleGrosConsoSelect :" + index + ":" + grosconsoSelected);
     const updatedInterGrosConso = [...selectedInterGrosConso];
     updatedInterGrosConso[index] = grosconsoSelected || "";
 
     dispatch(setInterGrosConso(updatedInterGrosConso));
     setSelectedInterGrosConso(updatedInterGrosConso);
+
+    // Activer le champ de texte si "Autre" est sélectionné
+    const updatedIsAutreGrosConsoSelected = [...isAutreGrosConsoSelected];
+    updatedIsAutreGrosConsoSelected[index] = grosconsoSelected === "Autre";
+    setIsAutreGrosConsoSelected(updatedIsAutreGrosConsoSelected);
   };
 
   const handleGestesInter = (gestesSelected, index) => {
@@ -310,9 +307,9 @@ const Home = () => {
           <i className="fa-solid fa-house"></i>
         </button>
       </div>
+      <h2>******************************************</h2>
       <div className="home-content">
         <div className="type-inter">
-          <h2>**********************************</h2>
           <h3 className="priorite-saisie">
             &#9888; Sélectionner le type d'intervention EN PREMIER{" "}
           </h3>
@@ -382,6 +379,18 @@ const Home = () => {
             <option value="Sous-Traitant">Sous-Traitant</option>
             <option value="Autre">Autre</option>
           </select>
+
+          {isAutreIntervenantSelected && (
+            <input
+              type="text"
+              name="autreIntervenant"
+              id="autreIntervenant"
+              placeholder="Entrez le nom de l'intervenant"
+              onChange={(e) => {
+                handleAutreIntervenant(e.target.value);
+              }}
+            />
+          )}
         </div>
 
         <div className="duree-inter">
@@ -417,6 +426,8 @@ const Home = () => {
           selectedInterPetitConso={selectedInterPetitConso}
           handlePetitConsoSelect={handlePetitConsoSelect}
           handlePetitConso={handlePetitConso}
+          isAutrePetitConsoSelected={isAutrePetitConsoSelected}
+          handleAutrePetitConso={handleAutrePetitConso}
         />
 
         {/* GROS CONSOMMABLE */}
@@ -427,6 +438,8 @@ const Home = () => {
           selectedInterGrosConso={selectedInterGrosConso}
           handleGrosConsoSelect={handleGrosConsoSelect}
           handleGrosConso={handleGrosConso}
+          isAutreGrosConsoSelected={isAutreGrosConsoSelected}
+          handleAutreGrosConso={handleAutreGrosConso}
         />
 
         <div className="gestes-inter">

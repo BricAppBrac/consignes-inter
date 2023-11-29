@@ -82,25 +82,6 @@ body h2 {
     font-size: 1.6rem;
   }
 }
-body .errmsg {
-  background: whitesmoke;
-  margin: 10px;
-  padding: 10px;
-  width: -moz-fit-content;
-  width: fit-content;
-  border-radius: 20px;
-  color: rgb(214, 86, 48);
-  font-size: 1.3rem;
-}
-body a {
-  background: rgb(136, 184, 96);
-  color: rgb(37, 21, 11);
-  border-radius: 20px;
-  width: 50px;
-  padding: 10px;
-  font-size: 1.4rem;
-  margin: auto 20px;
-}
 body h3 {
   margin: 10px auto;
 }
@@ -124,14 +105,15 @@ body h3 {
   background: rgb(136, 184, 96);
   color: rgb(37, 21, 11);
 }
-.home .home-content {
-  margin: 5px auto;
-}
 .home .home-content input {
   font-size: 1.2rem;
   font-family: Comic, sans-serif;
-  width: 100px;
+  width: 150px;
   margin-bottom: 10px;
+  height: 50px;
+}
+.home .home-content #autreIntervenant {
+  width: 300px;
 }
 .home .home-content button {
   font-size: 1.2rem;
@@ -147,23 +129,50 @@ body h3 {
   border: 5px solid rgb(136, 184, 96);
   padding: 5px;
   margin: 5px;
+  max-width: 700px;
+  overflow: scroll;
+  white-space: normal;
+}
+.home .home-content select option {
+  white-space: normal;
+  word-wrap: break-word;
 }
 .home .home-content p {
-  font-size: 1.4rem;
+  font-size: 1.2rem;
   color: rgb(168, 10, 29);
   background: rgba(187, 176, 159, 0.644);
   padding: 5px;
   margin: 15px auto;
-  text-align: center;
+  text-align: left;
 }
-.home .home-content h5 {
-  padding-left: 5px;
-  color: rgb(4, 26, 85);
-  font-size: 1.1rem;
+.home .home-content #grosconsoselect1,
+.home .home-content #grosconsoselect2,
+.home .home-content #grosconsoselect3 {
+  height: 85px;
+}
+.home .home-content .priorite-saisie {
+  color: rgb(168, 10, 29);
+  font-size: 1.5rem;
+}
+.home .home-content .gestes-inter input {
+  width: 500px;
+}
+.home .home-content .petit-conso input,
+.home .home-content .gros-conso input {
+  width: 700px;
 }
 
 .inter-generate-content {
   margin: 20px;
+}
+.inter-generate-content p {
+  font-size: 1.4rem;
+  color: rgb(37, 21, 11);
+  background: rgb(214, 86, 48);
+  padding: 5px;
+  margin: 15px auto;
+  text-align: center;
+  border-radius: 20px;
 }
 .inter-generate-content .inter-generate {
   text-align: center;

@@ -1,0 +1,44 @@
+{
+  "Chasse d'Eau 3/6 litres WC au sol": {
+    "messageInfoDuree": "RAS",
+    "messageInfoPetitConso": "RAS",
+    "messageInfoGrosConso": "Matériel classique en stock dans le camion",
+    "messageInfoGestes": "- Remplacement du robinet de WC + ensemble mécanisme chasse d’eau"
+  },
+  "Chauffe-Eau blinde": {
+    "messageInfoDuree": "(1,75h des 15L à 100L) – (2,25h des 150L à 200L) – (2,5h des 250 à 300L)",
+    "messageInfoPetitConso": "(ex. -> ??? plâtre, renfort bois, fixation de part en part, groupe de sécu coudé, groupe de sécu réverso ??? )",
+    "messageInfoGrosConso": "- Gros matériel 95% du temps toujours en stock chez fournisseur (à vérifier par Boris tout de même avec la ref sur le site du fournisseur si c’est fait par un employé blicko)",
+    "messageInfoGestes": "- Remplacement du chauffe-eau électrique - Bien valider l’alimentation électrique du chauffe-eau et si possible même en début de chantier ! - Bien filmer les références du nouveau chauffe-eau dans la vfc."
+  },
+  "Remplacer Meuble Vasque": {
+    "messageInfoDuree": "2H30min",
+    "messageInfoPetitConso": "Wago ou domino",
+    "messageInfoGrosConso": "Stock bureau à vérifier ou à commander, Mitigeur stock camion",
+    "messageInfoGestes": "- Remplacement ou mise en place d’un meuble lavabo . (miroir ou pas ) - Sur la vfc, bien filmer la bonne tenu de l’ensemble, la bonne étanchéité des raccords et l’eau froide et chaude correctement branchés"
+  },
+  "Robinet Mitigeur": {
+    "messageInfoDuree": "20/30/40 minutes",
+    "messageInfoPetitConso": "cache trou, raccords olive ou tectite, …",
+    "messageInfoGrosConso": "Matériel classique en stock dans le camion",
+    "messageInfoGestes": "- Remplacement du robinet. - Sur la vfc, bien filmer la bonne tenu de l’ensemble, la bonne étanchéité des raccords et l’eau froide et chaude correctement branchés"
+  },
+  "Vanne Radiateurs": {
+    "messageInfoDuree": "4 h",
+    "messageInfoPetitConso": "RAS",
+    "messageInfoGrosConso": "Matériel classique dispo chez fournisseur Richardson",
+    "messageInfoGestes": "- Purge de l'installation . - Remplacement robinet simple et coude de réglage sur 1 radiateur cuisine . - Remplacement robinet de réglage simple et coude de réglage sur 2 radiateur mezzanine. - Remplacement robinet simple et coude de réglage dans une chambre . - Remplacement robinet de réglage et coude de réglage dans sur 2 radiateurs du salon ."
+  },
+  "WC au sol std": {
+    "messageInfoDuree": "2,5h",
+    "messageInfoPetitConso": "ex : pipe std 90° avec manchon ou ZTT, fixations WC,… ",
+    "messageInfoGrosConso": "95% du temps toujours en stock chez fournisseur (à vérifier par Boris tout de même avec la ref sur le site du fournisseur si c’est fait par un blickoMan )",
+    "messageInfoGestes": "- Remplacement du wc complet (robinet WC y compris) avec reprise correcte de l’alimentation, remplacement de la pipe de wc ou au minimum du joint+collerette nicoll, bonne fixation au sol avec silicone translucide à la base de la cuvette si nécessité de renforcer la fixation de l’ensemble"
+  },
+  "Autre": {
+    "messageInfoDuree": "",
+    "messageInfoPetitConso": "",
+    "messageInfoGrosConso": "",
+    "messageInfoGestes": ""
+  }
+}

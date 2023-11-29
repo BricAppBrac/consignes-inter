@@ -7,6 +7,8 @@ const GrosConso = ({
   selectedInterGrosConso,
   handleGrosConsoSelect,
   handleGrosConso,
+  isAutreGrosConsoSelected,
+  handleAutreGrosConso,
 }) => {
   // Récupérer les options en fonction du selectedType
   const optionsData = grosconsoData[selectedType] || [];
@@ -43,6 +45,17 @@ const GrosConso = ({
                 ))}
                 <option value="Autre">Autre</option>
               </select>
+              {isAutreGrosConsoSelected[lineNumber - 1] && (
+                <input
+                  type="text"
+                  name={`autreGrosConso${lineNumber}`}
+                  id={`autreGrosConso${lineNumber}`}
+                  placeholder={`Entrez le gros consommable`}
+                  onChange={(e) => {
+                    handleAutreGrosConso(e.target.value, lineNumber - 1);
+                  }}
+                />
+              )}
             </div>
           ))}
         </div>

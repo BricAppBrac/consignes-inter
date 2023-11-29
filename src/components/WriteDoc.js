@@ -96,10 +96,6 @@ const WriteDoc = ({
       const doc = new Docxtemplater();
       doc.loadZip(zip);
 
-      // const gestesProperties = selectedInterGestes.map((geste, index) => ({
-      //   [`interGestes${index + 1}`]: geste !== undefined ? geste : "",
-      // }));
-
       const gestesProperties = Array.from({ length: 5 }, (_, index) => ({
         [`interGestes${index + 1}`]: selectedInterGestes[index] || "",
       }));

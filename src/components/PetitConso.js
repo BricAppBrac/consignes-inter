@@ -6,6 +6,8 @@ const PetitConso = ({
   selectedInterPetitConso,
   handlePetitConsoSelect,
   handlePetitConso,
+  isAutrePetitConsoSelected,
+  handleAutrePetitConso,
 }) => {
   let content = (
     <React.Fragment>
@@ -32,6 +34,18 @@ const PetitConso = ({
                 <option value="Domino">Domino </option>
                 <option value="Autre">Autre</option>
               </select>
+
+              {isAutrePetitConsoSelected[lineNumber - 1] && (
+                <input
+                  type="text"
+                  name={`autrePetitConso${lineNumber}`}
+                  id={`autrePetitConso${lineNumber}`}
+                  placeholder={`Entrez le petit consommable`}
+                  onChange={(e) => {
+                    handleAutrePetitConso(e.target.value, lineNumber - 1);
+                  }}
+                />
+              )}
             </div>
           ))}
         </div>
