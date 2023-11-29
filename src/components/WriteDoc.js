@@ -8,6 +8,8 @@ const WriteDoc = ({
   selectedNb,
   selectedNomIntervenant,
   selectedInterDuree,
+  selectedInterPetitConso,
+  selectedInterGrosConso,
   selectedInterGestes,
   selectedInterAudio,
   selectedId,
@@ -24,6 +26,8 @@ const WriteDoc = ({
   console.log("interNb :" + selectedNb);
   console.log("nomIntervenant :" + selectedNomIntervenant);
   console.log("dureeInter :" + selectedInterDuree);
+  console.log("petitconsoInter :" + selectedInterPetitConso);
+  console.log("grosconsoInter :" + selectedInterGrosConso);
   console.log("gestesInter :" + selectedInterGestes);
   console.log("audioInter :" + selectedInterAudio);
   console.log("interId :" + selectedId);
@@ -100,6 +104,14 @@ const WriteDoc = ({
         [`interGestes${index + 1}`]: selectedInterGestes[index] || "",
       }));
 
+      const petitconsoProperties = Array.from({ length: 5 }, (_, index) => ({
+        [`interPetitConso${index + 1}`]: selectedInterPetitConso[index] || "",
+      }));
+
+      const grosconsoProperties = Array.from({ length: 3 }, (_, index) => ({
+        [`interGrosConso${index + 1}`]: selectedInterGrosConso[index] || "",
+      }));
+
       const defaultValues = {
         interType: selectedType || "Erreur Type",
         interNb: selectedNb || "Erreur Nb",
@@ -117,6 +129,8 @@ const WriteDoc = ({
 
       const docData = {
         ...defaultValues,
+        ...Object.assign({}, ...petitconsoProperties),
+        ...Object.assign({}, ...grosconsoProperties),
         ...Object.assign({}, ...gestesProperties),
       };
 
@@ -142,7 +156,7 @@ const WriteDoc = ({
   return (
     <div className="inter-generate-content">
       <div className="generate-message">
-        {messageGenerate !== "" && <p>*** ATTENTION: {messageGenerate} ***</p>}
+        {messageGenerate !== "" && <p>&#9888; {messageGenerate} </p>}
       </div>
       <h2>Génération du Document Word</h2>
       <h2>***************************</h2>

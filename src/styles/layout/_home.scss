@@ -25,13 +25,6 @@
 
     margin: 5px auto;
 
-    .gestes-inter {
-      input {
-        width: 500px;
-      }
-    }
-  
-
     input {
       font-size: 1.2rem;
       font-family: $font1;
@@ -54,6 +47,16 @@
       border: 5px solid $green1;
       padding: 5px;
       margin: 5px;
+      max-width: 700px;
+      overflow: scroll;
+      white-space: normal;
+
+      
+    }
+
+    select option {
+      white-space: normal;
+      word-wrap: break-word;
     }
 
     p {
@@ -65,11 +68,34 @@
       text-align: left;
     }
 
-    h5 {
-      padding-left: 5px;
-      color: $blue;
-      font-size: 1.1rem;
+    #grosconsoselect1,
+      #grosconsoselect2,
+      #grosconsoselect3
+       {
+          height: 85px;
+      }
+
+   
+
+    .priorite-saisie {
+      color: $red;
+      font-size: 1.5rem;
     }
+
+    .gestes-inter {
+      input {
+        width: 500px;
+      }
+    }
+
+    .petit-conso,
+    .gros-conso {
+      input {
+        width: 700px;
+      }
+    }
+
+   
 
     
 

@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
+import PetitConso from "../components/PetitConso";
+import GrosConso from "../components/GrosConso";
 
 import {
   setInterType,
@@ -12,6 +14,10 @@ import {
   clearInterDuree,
   setInterGestes,
   clearInterGestes,
+  setInterPetitConso,
+  clearInterPetitConso,
+  setInterGrosConso,
+  clearInterGrosConso,
   setInterAudio,
   clearInterAudio,
   setInterId,
@@ -29,7 +35,13 @@ const Home = () => {
 
   const [selectedNomIntervenant, setSelectedNomIntervenant] = useState("");
   const [selectedInterDuree, setSelectedInterDuree] = useState("");
-  const [selectedInterGestes, setSelectedInterGestes] = useState([]);
+  const [selectedInterGestes, setSelectedInterGestes] = useState([
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
   // eslint-disable-next-line no-unused-vars
   const [selectedInterGestes1, setSelectedInterGestes1] = useState("");
   // eslint-disable-next-line no-unused-vars
@@ -40,7 +52,34 @@ const Home = () => {
   const [selectedInterGestes4, setSelectedInterGestes4] = useState("");
   // eslint-disable-next-line no-unused-vars
   const [selectedInterGestes5, setSelectedInterGestes5] = useState("");
-
+  const [selectedInterPetitConso, setSelectedInterPetitConso] = useState([
+    "",
+    "",
+    "",
+    "",
+    "",
+  ]);
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterPetitConso1, setSelectedInterPetitConso1] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterPetitConso2, setSelectedInterPetitConso2] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterPetitConso3, setSelectedInterPetitConso3] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterPetitConso4, setSelectedInterPetitConso4] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterPetitConso5, setSelectedInterPetitConso5] = useState("");
+  const [selectedInterGrosConso, setSelectedInterGrosConso] = useState([
+    "",
+    "",
+    "",
+  ]);
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterGrosConso1, setSelectedInterGrosConso1] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterGrosConso2, setSelectedInterGrosConso2] = useState("");
+  // eslint-disable-next-line no-unused-vars
+  const [selectedInterGrosConso3, setSelectedInterGrosConso3] = useState("");
   const [selectedInterAudio, setSelectedInterAudio] = useState("");
 
   const [selectedId, setSelectedId] = useState("");
@@ -66,6 +105,16 @@ const Home = () => {
     setSelectedNb("");
     setSelectedNomIntervenant("");
     setSelectedInterDuree("");
+    setSelectedInterPetitConso(["", "", "", "", ""]);
+    setSelectedInterPetitConso1("");
+    setSelectedInterPetitConso2("");
+    setSelectedInterPetitConso3("");
+    setSelectedInterPetitConso4("");
+    setSelectedInterPetitConso5("");
+    setSelectedInterGrosConso(["", "", ""]);
+    setSelectedInterGrosConso1("");
+    setSelectedInterGrosConso2("");
+    setSelectedInterGrosConso3("");
     setSelectedInterGestes(["", "", "", "", ""]); // Réinitialisation des gestes
     setSelectedInterGestes1("");
     setSelectedInterGestes2("");
@@ -85,6 +134,8 @@ const Home = () => {
 
     dispatch(clearNomIntervenant());
     dispatch(clearInterDuree());
+    dispatch(clearInterPetitConso());
+    dispatch(clearInterGrosConso());
     dispatch(clearInterGestes());
     dispatch(clearInterAudio());
     dispatch(clearInterId());
@@ -190,10 +241,45 @@ const Home = () => {
     setSelectedInterDuree(dureeSelected);
   };
 
+  const handlePetitConso = (petitconsoSelected, index) => {
+    console.log("handlePetitConso :" + index + ":" + petitconsoSelected);
+    const updatedPetitConso = [...selectedInterPetitConso];
+    updatedPetitConso[index] = petitconsoSelected || ""; // Handle undefined values
+    setSelectedInterPetitConso(updatedPetitConso);
+    dispatch(setInterPetitConso(updatedPetitConso));
+  };
+
+  const handleGrosConso = (grosconsoSelected, index) => {
+    console.log("handleGrosConso :" + index + ":" + grosconsoSelected);
+    const updatedGrosConso = [...selectedInterGrosConso];
+    updatedGrosConso[index] = grosconsoSelected || ""; // Handle undefined values
+    setSelectedInterGrosConso(updatedGrosConso);
+    dispatch(setInterGrosConso(updatedGrosConso));
+  };
+
+  const handlePetitConsoSelect = (petitconsoSelected, index) => {
+    console.log("handlePetitConsoSelect :" + petitconsoSelected);
+    const updatedInterPetitConso = [...selectedInterPetitConso];
+    updatedInterPetitConso[index] = petitconsoSelected || "";
+
+    dispatch(setInterPetitConso(updatedInterPetitConso));
+    setSelectedInterPetitConso(updatedInterPetitConso);
+  };
+
+  const handleGrosConsoSelect = (grosconsoSelected, index) => {
+    console.log("handleGrosConsoSelect :" + grosconsoSelected);
+
+    const updatedInterGrosConso = [...selectedInterGrosConso];
+    updatedInterGrosConso[index] = grosconsoSelected || "";
+
+    dispatch(setInterGrosConso(updatedInterGrosConso));
+    setSelectedInterGrosConso(updatedInterGrosConso);
+  };
+
   const handleGestesInter = (gestesSelected, index) => {
     console.log("handleGestesInter :" + index + ":" + gestesSelected);
     const updatedGestes = [...selectedInterGestes];
-    updatedGestes[index] = gestesSelected;
+    updatedGestes[index] = gestesSelected || "";
     setSelectedInterGestes(updatedGestes);
     dispatch(setInterGestes(updatedGestes));
   };
@@ -227,8 +313,10 @@ const Home = () => {
       <div className="home-content">
         <div className="type-inter">
           <h2>**********************************</h2>
-          <h3>** Sélectionner le type d'intervention</h3>
-          <h3>**********************************</h3>
+          <h3 className="priorite-saisie">
+            &#9888; Sélectionner le type d'intervention EN PREMIER{" "}
+          </h3>
+          <h3>*************************************************</h3>
           <select
             name="typeinter"
             required
@@ -321,6 +409,26 @@ const Home = () => {
           />
         </div>
 
+        {/* PETIT CONSOMMABLE */}
+
+        <PetitConso
+          selectedType={selectedType}
+          messageInfoPetitConso={messageInfoPetitConso}
+          selectedInterPetitConso={selectedInterPetitConso}
+          handlePetitConsoSelect={handlePetitConsoSelect}
+          handlePetitConso={handlePetitConso}
+        />
+
+        {/* GROS CONSOMMABLE */}
+
+        <GrosConso
+          selectedType={selectedType}
+          messageInfoGrosConso={messageInfoGrosConso}
+          selectedInterGrosConso={selectedInterGrosConso}
+          handleGrosConsoSelect={handleGrosConsoSelect}
+          handleGrosConso={handleGrosConso}
+        />
+
         <div className="gestes-inter">
           <h3>** Gestes à effectuer (5 lignes de 100 car max)</h3>
           <h3>**********************************</h3>
@@ -361,7 +469,7 @@ const Home = () => {
             <option value="OUI il est dans le dossier du client dans l’onglet « autre »">
               OUI il est dans le dossier du client dans l’onglet « autre »
             </option>
-            <option value="Autre">Autre</option>
+            {/* <option value="Autre">Autre</option> */}
           </select>
         </div>
 
@@ -406,6 +514,8 @@ const Home = () => {
           selectedNb={selectedNb}
           selectedNomIntervenant={selectedNomIntervenant}
           selectedInterDuree={selectedInterDuree}
+          selectedInterPetitConso={selectedInterPetitConso}
+          selectedInterGrosConso={selectedInterGrosConso}
           selectedInterGestes={selectedInterGestes}
           selectedInterAudio={selectedInterAudio}
           selectedId={selectedId}

@@ -11,7 +11,7 @@ const interSelectedSlice = createSlice({
     interGrosConso: [],
     interGestes: [],
     interMessage:
-      "VFC à envoyer SUR LE MOMENT !! + ajuster votre horaire d’arrivée SVP messieurs 🙏🏻🙏🏻🙏🏻🙏🏻",
+      "VFC à envoyer SUR LE MOMENT !! + ajuster votre horaire d’arrivée SVP messieurs 🙏🏻🙏🏻🙏🏻🙏🏻", // Non utilisé, en dur dans la trame
     interAudio: null,
     interId: null,
     interAgence: null,
@@ -43,14 +43,14 @@ const interSelectedSlice = createSlice({
       state.interDuree = null;
     },
 
-    addInterPetitConso: (state, action) => {
-      state.interPetitConso.push(action.payload);
+    setInterPetitConso: (state, action) => {
+      state.interPetitConso = action.payload;
     },
     clearInterPetitConso: (state) => {
       state.interPetitConso = [];
     },
-    addInterGrosConso: (state, action) => {
-      state.interGrosConso.push(action.payload);
+    setInterGrosConso: (state, action) => {
+      state.interGrosConso = action.payload;
     },
     clearInterGrosConso: (state) => {
       state.interGrosConso = [];
@@ -92,9 +92,9 @@ export const {
   clearInterNb,
   clearNomIntervenant,
   clearInterDuree,
-  addInterPetitConso,
+  setInterPetitConso,
   clearInterPetitConso,
-  addInterGrosConso,
+  setInterGrosConso,
   clearInterGrosConso,
   setInterGestes,
   clearInterGestes,
