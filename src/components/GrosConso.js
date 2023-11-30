@@ -19,13 +19,16 @@ const GrosConso = ({
 
   let content = (
     <>
-      {selectedType !== "Autre" && (
+      {(selectedType === "Chasse d'Eau 3/6 litres WC au sol" ||
+        selectedType === "Chauffe-Eau blinde" ||
+        selectedType === "Remplacer Meuble Vasque" ||
+        selectedType === "Robinet Mitigeur" ||
+        selectedType === "Vanne Radiateurs" ||
+        selectedType === "WC au sol std") && (
         <div className="gros-conso">
           <h3>** Grosse(s) fourniture(s) à prévoir</h3>
           <h3>**********************************</h3>
-          {messageInfoGrosConso !== "RAS" && messageInfoGrosConso !== "" && (
-            <p>NB: {messageInfoGrosConso}</p>
-          )}
+          {messageInfoGrosConso !== "" && <p>{messageInfoGrosConso}</p>}
 
           {[1, 2, 3].map((lineNumber) => (
             <div key={lineNumber}>
@@ -61,31 +64,34 @@ const GrosConso = ({
         </div>
       )}
 
-      {selectedType === "Autre" && (
-        <div className="gros-conso">
-          <h3>
-            ** Grosse(s) fourniture(s) à prévoir (3 lignes de 300 car max)
-          </h3>
-          <h3>**********************************</h3>
-          {messageInfoGrosConso !== "RAS" && messageInfoGrosConso !== "" && (
-            <p>NB: {messageInfoGrosConso}</p>
-          )}
-          {[1, 2, 3].map((lineNumber) => (
-            <div key={lineNumber}>
-              <input
-                type="text"
-                name={`grosconso${lineNumber}`}
-                id={`grosconso${lineNumber}`}
-                value={selectedInterGrosConso[lineNumber - 1]}
-                maxLength={300}
-                onChange={(e) => {
-                  handleGrosConso(e.target.value, lineNumber - 1);
-                }}
-              />
-            </div>
-          ))}
-        </div>
-      )}
+      {selectedType !== "Chasse d'Eau 3/6 litres WC au sol" &&
+        selectedType !== "Chauffe-Eau blinde" &&
+        selectedType !== "Remplacer Meuble Vasque" &&
+        selectedType !== "Robinet Mitigeur" &&
+        selectedType !== "Vanne Radiateurs" &&
+        selectedType !== "WC au sol std" && (
+          <div className="gros-conso">
+            <h3>
+              ** Grosse(s) fourniture(s) à prévoir (3 lignes de 300 car max)
+            </h3>
+            <h3>**********************************</h3>
+            {messageInfoGrosConso !== "" && <p>{messageInfoGrosConso}</p>}
+            {[1, 2, 3].map((lineNumber) => (
+              <div key={lineNumber}>
+                <input
+                  type="text"
+                  name={`grosconso${lineNumber}`}
+                  id={`grosconso${lineNumber}`}
+                  value={selectedInterGrosConso[lineNumber - 1]}
+                  maxLength={300}
+                  onChange={(e) => {
+                    handleGrosConso(e.target.value, lineNumber - 1);
+                  }}
+                />
+              </div>
+            ))}
+          </div>
+        )}
     </>
   );
 

@@ -15,9 +15,7 @@ const PetitConso = ({
         <div className="petit-conso">
           <h3>** Petit consommable un peu spécial</h3>
           <h3>**********************************</h3>
-          {messageInfoPetitConso !== "RAS" && messageInfoPetitConso !== "" && (
-            <p>NB: {messageInfoPetitConso}</p>
-          )}
+          {messageInfoPetitConso !== "" && <p>{messageInfoPetitConso}</p>}
           {[1, 2, 3, 4, 5].map((lineNumber) => (
             <div key={lineNumber}>
               <select
@@ -55,9 +53,7 @@ const PetitConso = ({
         <div className="petit-conso">
           <h3>** Petit consommable un peu spécial (5 lignes de 300 car max)</h3>
           <h3>**********************************</h3>
-          {messageInfoPetitConso !== "RAS" && messageInfoPetitConso !== "" && (
-            <p>NB: {messageInfoPetitConso}</p>
-          )}
+          {messageInfoPetitConso !== "" && <p>{messageInfoPetitConso}</p>}
           {[1, 2, 3, 4, 5].map((lineNumber) => (
             <div key={lineNumber}>
               <input

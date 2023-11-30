@@ -94,7 +94,7 @@ const Home = () => {
   const [messageGenerate, setMessageGenerate] = useState("");
 
   // Gestion des Autre
-
+  const [isAutreInterSelected, setIsAutreInterSelected] = useState(false);
   const [isAutreIntervenantSelected, setIsAutreIntervenantSelected] =
     useState(false);
   const [isAutrePetitConsoSelected, setIsAutrePetitConsoSelected] = useState([
@@ -159,6 +159,7 @@ const Home = () => {
     dispatch(clearInterId());
     dispatch(clearInterAgence());
 
+    setIsAutreInterSelected(false);
     setIsAutreIntervenantSelected(false);
     setIsAutrePetitConsoSelected([false, false, false, false, false]);
     setIsAutreGrosConsoSelected([false, false, false]);
@@ -168,12 +169,20 @@ const Home = () => {
     console.log("handleTypeInter :" + typeSelected);
     dispatch(setInterType(typeSelected));
     setSelectedType(typeSelected);
+    // Activer le champ de texte si "Autre" est sélectionné
+    setIsAutreInterSelected(typeSelected === "Autre");
     // Utilisez les données du fichier JSON pour afficher les messages informatifs correspondants
     const messagesData = messagesInfo[typeSelected] || {};
     setMessageInfoDuree(messagesData.messageInfoDuree || "");
     setMessageInfoPetitConso(messagesData.messageInfoPetitConso || "");
     setMessageInfoGrosConso(messagesData.messageInfoGrosConso || "");
     setMessageInfoGestes(messagesData.messageInfoGestes || "");
+  };
+
+  const handleAutreInter = (interInput) => {
+    console.log("handleAutreInter :" + interInput);
+    dispatch(setInterType(interInput));
+    setSelectedType(interInput);
   };
 
   const handleNbInter = (nbSelected) => {
@@ -335,6 +344,17 @@ const Home = () => {
             <option value="WC au sol std">WC au sol std</option>
             <option value="Autre">Autre</option>
           </select>
+          {isAutreInterSelected && (
+            <input
+              type="text"
+              name="autreIntervention"
+              id="autreIntervention"
+              placeholder="Entrez le nom de l'intervention"
+              onChange={(e) => {
+                handleAutreInter(e.target.value);
+              }}
+            />
+          )}
         </div>
 
         <div className="nb-inter">
@@ -400,9 +420,7 @@ const Home = () => {
           </h3>
           <h3>**********************************</h3>
 
-          {messageInfoDuree !== "RAS" && messageInfoDuree !== "" && (
-            <p>NB: {messageInfoDuree}</p>
-          )}
+          {messageInfoDuree !== "" && <p>{messageInfoDuree}</p>}
 
           <input
             type="text"
@@ -445,9 +463,7 @@ const Home = () => {
         <div className="gestes-inter">
           <h3>** Gestes à effectuer (5 lignes de 100 car max)</h3>
           <h3>**********************************</h3>
-          {messageInfoGestes !== "RAS" && messageInfoGestes !== "" && (
-            <p>NB: {messageInfoGestes}</p>
-          )}
+          {messageInfoGestes !== "" && <p>{messageInfoGestes}</p>}
           {[1, 2, 3, 4, 5].map((lineNumber) => (
             <div key={lineNumber}>
               <input
