@@ -90,6 +90,7 @@ body h3 {
   display: flex;
   flex-direction: column;
   margin: 20px;
+  padding-left: 20px;
 }
 .home .home-title {
   display: flex;
@@ -112,7 +113,8 @@ body h3 {
   margin-bottom: 10px;
   height: 50px;
 }
-.home .home-content #autreIntervenant {
+.home .home-content #autreIntervenant,
+.home .home-content #autreIntervention {
   width: 300px;
 }
 .home .home-content button {
